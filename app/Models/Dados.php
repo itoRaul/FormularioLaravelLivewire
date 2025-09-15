@@ -22,4 +22,10 @@ class Dados extends Model
         'bairro',
         'complemento'
     ];
+
+    /*
+    public function estadoCivil(){
+        return $this->hasOne(EstadoCivil::class, 'id', 'estado_civil_id');
+    }
+    */
 }
