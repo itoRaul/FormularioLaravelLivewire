@@ -11,6 +11,10 @@ class Dados extends Model
 
     protected $fillable = [
         'nomecompleto',
+        'estado_civil_id',
+        'grau_instrucao_id',
+        'nacionalidade',
+        'sexo_id',
         'nomesocial',
         'cpf',
         'rg',
@@ -23,9 +27,16 @@ class Dados extends Model
         'complemento'
     ];
 
-    /*
     public function estadoCivil(){
-        return $this->hasOne(EstadoCivil::class, 'id', 'estado_civil_id');
+        return $this->belongsTo(EstadoCivil::class);
     }
-    */
+
+    public function grauInstrucao(){
+        return $this->belongsTo(GrauInstrucao::class);
+    }
+
+    public function sexo(){
+        return $this->belongsTo(Sexo::class);
+    }
+
 }

@@ -4,6 +4,9 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Dados;
+use App\Models\EstadoCivil;
+use App\Models\GrauInstrucao;
+use App\Models\Sexo;
 use Livewire\WithPagination;
 
 class Forms extends Component
@@ -14,6 +17,10 @@ class Forms extends Component
     protected $rules = [
         'nomecompleto' => 'required|string|max:255',
         'nomesocial' => 'nullable|string|max:255',
+        'estado_civil_id' => 'required|exists:estados_civis,id',
+        'grau_instrucao_id' => 'required|exists:graus_instrucaos,id',
+        'sexo_id' => 'required|exists:sexos,id',
+        'nacionalidade' => 'required|in:Brasileira,Estrangeira',
         'cpf' => 'required|string|max:14',
         'rg' => 'required|string|max:20',
         'email' => 'required|string|max:255',
@@ -27,6 +34,13 @@ class Forms extends Component
 
     public string $nomecompleto = '';
     public string $nomesocial = '';
+    public $estadosCivis = [];
+    public ?int $estado_civil_id = null;
+    public $grausInstrucaos = [];
+    public ?int $grau_instrucao_id = null;
+    public $sexos = [];
+    public ?int $sexo_id = null;
+    public ?string $nacionalidade = null;
     public string $cpf = '';
     public string $rg = '';
     public string $email = '';
@@ -56,8 +70,12 @@ class Forms extends Component
                 $this->numero = $pessoa->numero;
                 $this->bairro = $pessoa->bairro;
                 $this->complemento = $pessoa->complemento;
+                $this->nacionalidade = $pessoa->nacionalidade;
             }
         }
+        $this->estadosCivis = EstadoCivil::whereIn('status', [true, 1])->get();
+        $this->grausInstrucaos = GrauInstrucao::whereIn('status', [true, 1])->get();
+        $this->sexos = Sexo::whereIn('status', [true, 1])->get();
     }
 
     public function render()
@@ -78,7 +96,7 @@ class Forms extends Component
 
         Dados::create($this->only([
             'nomecompleto', 'nomesocial', 'cpf', 'rg', 'email', 'telefone',
-            'cep', 'logradouro', 'numero', 'bairro', 'complemento'
+            'cep', 'estado_civil_id', 'nacionalidade', 'grau_instrucao_id', 'sexo_id', 'logradouro', 'numero', 'bairro', 'complemento'
         ]));
 
         $this->reset();
@@ -93,7 +111,7 @@ class Forms extends Component
         if ($pessoa) {
             $pessoa->update($this->only([
                 'nomecompleto', 'nomesocial', 'cpf', 'rg', 'email', 'telefone',
-                'cep', 'logradouro', 'numero', 'bairro', 'complemento'
+                'cep', 'estado_civil_id', 'nacionalidade', 'grau_instrucao_id', 'sexo_id', 'logradouro', 'numero', 'bairro', 'complemento'
             ]));
 
             return redirect('/form');
