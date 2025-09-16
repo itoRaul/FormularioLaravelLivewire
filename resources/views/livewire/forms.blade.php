@@ -25,6 +25,32 @@
             @error('bairro') <span class="error">{{ $message }}</span> @enderror
             <input type="text" placeholder="Complemento" wire:model="complemento">
             @error('complemento') <span class="error">{{ $message }}</span> @enderror
+            <select wire:model="estado_civil_id">
+                <option value="">Estado Civil</option>
+                @foreach ($estadosCivis as $estadoCivil)
+                    <option value="{{ $estadoCivil->id }}">{{ $estadoCivil->name }}</option>
+                @endforeach
+            </select>
+            @error('estado_civil_id') <span class="error">{{ $message }}</span> @enderror
+            <select wire:model="grau_instrucao_id">
+                <option value="">Grau de Instrução</option>
+                @foreach ($grausInstrucaos as $grauInstrucao)
+                    <option value="{{ $grauInstrucao->id }}">{{ $grauInstrucao->name }}</option>
+                @endforeach
+            </select>
+            @error('grau_instrucao_id') <span class="error">{{ $message }}</span> @enderror
+            <select wire:model="sexo_id">
+                <option value="">Sexo</option>
+                @foreach ($sexos as $sexo)
+                    <option value="{{ $sexo->id }}">{{ $sexo->name }}</option>
+                @endforeach
+            </select>
+            @error('sexo_id') <span class="error">{{ $message }}</span> @enderror
+            <select wire:model="nacionalidade" placeholder="Nacionalidade">
+                <option value="Brasileira">Brasileira</option>
+                <option value="Estrangeira">Estrangeira</option>
+            </select>
+            @error('nacionalidade') <span class="error">{{ $message }}</span> @enderror
         </div>
         <button type="submit">Cadastrar</button>
     </form>
@@ -43,6 +69,10 @@
         Número: {{ $dado->numero }}<br>
         Bairro: {{ $dado->bairro }}<br>
         Complemento: {{ $dado->complemento }}<br>
+        Estado Civil: {{ $dado->estadoCivil->name ?? 'N/A' }}<br>
+        Grau de Instrução: {{ $dado->grauInstrucao->name ?? 'N/A' }}<br>
+        Sexo: {{ $dado->sexo->name ?? 'N/A' }}<br>
+        Nacionalidade: {{ $dado->nacionalidade }}<br>
         <button><a href="{{ route('form.edit', ['id' => $dado->id]) }}">Editar</a></button>
         <button wire:click="delete({{ $dado->id }})">Deletar</button>
         <br>
