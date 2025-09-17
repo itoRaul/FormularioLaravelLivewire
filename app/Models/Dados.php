@@ -14,6 +14,7 @@ class Dados extends Model
         'estado_civil_id',
         'grau_instrucao_id',
         'nacionalidade',
+        'city_id',
         'sexo_id',
         'nomesocial',
         'cpf',
@@ -37,6 +38,10 @@ class Dados extends Model
 
     public function sexo(){
         return $this->belongsTo(Sexo::class);
+    }
+
+    public function city(){
+        return $this->belongsTo(City::class);
     }
 
 }

@@ -27,6 +27,7 @@ return new class extends Migration
             $table->foreignId('estado_civil_id')->constrained('estados_civis');
             $table->foreignId('grau_instrucao_id')->constrained('graus_instrucaos');
             $table->foreignId('sexo_id')->constrained('sexos');
+            $table->foreignId('city_id')->constrained('cities');
             $table->enum('nacionalidade', ['Brasileira', 'Estrangeira']);
             $table->timestamps();
         });

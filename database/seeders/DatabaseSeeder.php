@@ -15,5 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call([EstadoCivilSeeder::class]);
         $this->call([GrauInstrucaoSeeder::class]);
         $this->call([SexoSeeder::class]);
+        $this->call([StateSeeder::class]);
+        $this->call([CitySeeder::class]);
     }
 }
