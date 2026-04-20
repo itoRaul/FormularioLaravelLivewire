@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sexo extends Model
+class Gender extends Model
 {
     use HasFactory;
 
@@ -14,9 +14,10 @@ class Sexo extends Model
         'status'
     ];
 
-    protected $table = 'sexos';
-    
-    public function data(){
+    protected $table = 'genders';
+
+    public function data()
+    {
 
         return $this->hasMany(Data::class, 'gender_id', 'id');
     }

@@ -61,8 +61,8 @@
             <label class="block text-gray-700 mb-1">Estado Civil</label>
             <select wire:model="marital_status_id" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300">
                 <option value="">Selecione</option>
-                @foreach ($estadosCivis as $estadoCivil)
-                    <option value="{{ $estadoCivil->id }}">{{ $estadoCivil->name }}</option>
+                @foreach ($maritalStatus as $status)
+                    <option value="{{ $status->id }}">{{ $status->name }}</option>
                 @endforeach
             </select>
             @error('marital_status_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
@@ -71,8 +71,8 @@
             <label class="block text-gray-700 mb-1">Grau de Instrução</label>
             <select wire:model="education_level_id" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300">
                 <option value="">Selecione</option>
-                @foreach ($grausInstrucaos as $grauInstrucao)
-                    <option value="{{ $grauInstrucao->id }}">{{ $grauInstrucao->name }}</option>
+                @foreach ($educationLevels as $level)
+                    <option value="{{ $level->id }}">{{ $level->name }}</option>
                 @endforeach
             </select>
             @error('education_level_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
@@ -81,8 +81,8 @@
             <label class="block text-gray-700 mb-1">Sexo</label>
             <select wire:model="gender_id" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300">
                 <option value="">Selecione</option>
-                @foreach ($sexos as $sexo)
-                    <option value="{{ $sexo->id }}">{{ $sexo->name }}</option>
+                @foreach ($genders as $gender_item)
+                    <option value="{{ $gender_item->id }}">{{ $gender_item->name }}</option>
                 @endforeach
             </select>
             @error('gender_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
@@ -133,7 +133,7 @@
                     <div><span class="font-semibold">Grau de Instrução:</span> {{ $d->educationLevel->name ?? 'N/A' }}</div>
                     <div><span class="font-semibold">Sexo:</span> {{ $d->gender->name ?? 'N/A' }}</div>
                     <div><span class="font-semibold">Nacionalidade:</span> {{ $d->nationality }}</div>
-                    <div><span class="font-semibold">Cidade:</span> {{ $d->city->name ?? 'N/A' }}</div>
+                    <div><span class="font-semibold">Naturalidade:</span> {{ $d->city->name ?? 'N/A' }}</div>
                 </div>
                 <div class="mt-4 flex gap-2">
                     <a href="{{ route('form.edit', ['id' => $d->id]) }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition">Editar</a>

@@ -30,17 +30,17 @@ class Data extends Model
 
     public function maritalStatus()
     {
-        return $this->belongsTo(EstadoCivil::class, 'marital_status_id');
+        return $this->belongsTo(MaritalStatus::class, 'marital_status_id');
     }
 
     public function educationLevel()
     {
-        return $this->belongsTo(GrauInstrucao::class, 'education_level_id');
+        return $this->belongsTo(EducationLevel::class, 'education_level_id');
     }
 
     public function gender()
     {
-        return $this->belongsTo(Sexo::class, 'gender_id');
+        return $this->belongsTo(Gender::class, 'gender_id');
     }
 
     public function city()
@@ -48,4 +48,3 @@ class Data extends Model
         return $this->belongsTo(City::class);
     }
 }
-

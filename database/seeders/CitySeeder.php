@@ -13,7 +13,7 @@ class CitySeeder extends Seeder
      */
     public function run(): void
     {
-        
+
         $cities = [
             ['name' => 'Cuiabá', 'state_id' => 1],
             ['name' => 'Várzea Grande', 'state_id' => 1],

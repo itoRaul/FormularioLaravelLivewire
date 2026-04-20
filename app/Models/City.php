@@ -11,16 +11,10 @@ class City extends Model
 
     protected $fillable = [
         'name',
-        'state_id',
         'status'
     ];
 
     protected $table = 'cities';
-
-    public function state()
-    {
-        return $this->belongsTo(State::class);
-    }
 
     public function data()
     {
