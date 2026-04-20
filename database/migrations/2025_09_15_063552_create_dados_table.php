@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dados', function (Blueprint $table) {
+        Schema::create('data', function (Blueprint $table) {
             $table->id();
-            $table->string('nomecompleto');
-            $table->string('nomesocial')->nullable();
+            $table->string('fullname');
+            $table->string('socialname')->nullable();
             $table->string('cpf')->unique();
             $table->string('rg')->unique();
             $table->string('email');
-            $table->string('telefone');
+            $table->string('phone');
             $table->string('cep');
-            $table->string('logradouro');
-            $table->string('numero');
-            $table->string('bairro');
-            $table->string('complemento')->nullable();
+            $table->string('address');
+            $table->string('number');
+            $table->string('neighborhood');
+            $table->string('complement')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dados');
+        Schema::dropIfExists('data');
     }
 };

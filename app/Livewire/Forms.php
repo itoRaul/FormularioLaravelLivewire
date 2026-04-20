@@ -3,72 +3,71 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Dados;
+use App\Models\Data;
 use Livewire\WithPagination;
 
 class Forms extends Component
 {
 
-    use WithPagination; 
+    use WithPagination;
 
     protected $rules = [
-        'nomecompleto' => 'required|string|max:255',
-        'nomesocial' => 'nullable|string|max:255',
+        'fullname' => 'required|string|max:255',
+        'socialname' => 'nullable|string|max:255',
         'cpf' => 'required|string|max:14',
         'rg' => 'required|string|max:20',
         'email' => 'required|string|max:255',
-        'telefone' => 'required|string|max:15',
+        'phone' => 'required|string|max:15',
         'cep' => 'required|string|max:9',
-        'logradouro' => 'required|string|max:255',
-        'numero' => 'required|string|max:10',
-        'bairro' => 'required|string|max:100',
-        'complemento' => 'nullable|string|max:255',
+        'address' => 'required|string|max:255',
+        'number' => 'required|string|max:10',
+        'neighborhood' => 'required|string|max:100',
+        'complement' => 'nullable|string|max:255',
     ];
 
-    public string $nomecompleto = '';
-    public string $nomesocial = '';
+    public string $fullname = '';
+    public string $socialname = '';
     public string $cpf = '';
     public string $rg = '';
     public string $email = '';
-    public string $telefone = '';
+    public string $phone = '';
     public string $cep = '';
-    public string $logradouro = '';
-    public string $numero = '';
-    public string $bairro = '';
-    public string $complemento = '';
+    public string $address = '';
+    public string $number = '';
+    public string $neighborhood = '';
+    public string $complement = '';
 
-    public ?int $pessoa_id = null;
+    public ?int $data_id = null;
 
     public function mount($id = null)
     {
         if ($id) {
-            $this->pessoa_id = $id;
-            $pessoa = Dados::find($this->pessoa_id);
-            if ($pessoa) {
-                $this->nomecompleto = $pessoa->nomecompleto;
-                $this->nomesocial = $pessoa->nomesocial;
-                $this->cpf = $pessoa->cpf;
-                $this->rg = $pessoa->rg;
-                $this->email = $pessoa->email;
-                $this->telefone = $pessoa->telefone;
-                $this->cep = $pessoa->cep;
-                $this->logradouro = $pessoa->logradouro;
-                $this->numero = $pessoa->numero;
-                $this->bairro = $pessoa->bairro;
-                $this->complemento = $pessoa->complemento;
+            $this->data_id = $id;
+            $data = Data::find($this->data_id);
+            if ($data) {
+                $this->fullname = $data->fullname;
+                $this->socialname = $data->socialname;
+                $this->cpf = $data->cpf;
+                $this->rg = $data->rg;
+                $this->email = $data->email;
+                $this->phone = $data->phone;
+                $this->cep = $data->cep;
+                $this->address = $data->address;
+                $this->number = $data->number;
+                $this->neighborhood = $data->neighborhood;
+                $this->complement = $data->complement;
             }
         }
     }
 
     public function render()
     {
-        if ($this->pessoa_id) {
+        if ($this->data_id) {
             return view('livewire.edit');
         }
 
-        $dados = Dados::latest()->paginate(1);
-        return view('livewire.forms', compact('dados'));
-
+        $data = Data::latest()->paginate(1);
+        return view('livewire.forms', compact('data'));
     }
 
     public function create()
@@ -76,9 +75,18 @@ class Forms extends Component
 
         $this->validate();
 
-        Dados::create($this->only([
-            'nomecompleto', 'nomesocial', 'cpf', 'rg', 'email', 'telefone',
-            'cep', 'logradouro', 'numero', 'bairro', 'complemento'
+        Data::create($this->only([
+            'fullname',
+            'socialname',
+            'cpf',
+            'rg',
+            'email',
+            'phone',
+            'cep',
+            'address',
+            'number',
+            'neighborhood',
+            'complement'
         ]));
 
         $this->reset();
@@ -88,12 +96,21 @@ class Forms extends Component
     {
         $this->validate();
 
-        $pessoa = Dados::find($this->pessoa_id);
+        $data = Data::find($this->data_id);
 
-        if ($pessoa) {
-            $pessoa->update($this->only([
-                'nomecompleto', 'nomesocial', 'cpf', 'rg', 'email', 'telefone',
-                'cep', 'logradouro', 'numero', 'bairro', 'complemento'
+        if ($data) {
+            $data->update($this->only([
+                'fullname',
+                'socialname',
+                'cpf',
+                'rg',
+                'email',
+                'phone',
+                'cep',
+                'address',
+                'number',
+                'neighborhood',
+                'complement'
             ]));
 
             return redirect('/form');
@@ -102,11 +119,10 @@ class Forms extends Component
 
     public function delete($id)
     {
-        $pessoa = Dados::find($id);
+        $data = Data::find($id);
 
-        if ($pessoa) {
-            $pessoa->delete();
+        if ($data) {
+            $data->delete();
         }
     }
-
 }
