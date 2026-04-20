@@ -24,6 +24,11 @@ return new class extends Migration
             $table->string('number');
             $table->string('neighborhood');
             $table->string('complement')->nullable();
+            $table->foreignId('marital_status_id')->constrained('estados_civis');
+            $table->foreignId('education_level_id')->constrained('graus_instrucaos');
+            $table->foreignId('gender_id')->constrained('sexos');
+            $table->foreignId('city_id')->constrained('cities');
+            $table->enum('nationality', ['Brasileira', 'Estrangeira']);
             $table->timestamps();
         });
     }

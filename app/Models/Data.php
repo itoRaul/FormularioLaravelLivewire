@@ -20,6 +20,32 @@ class Data extends Model
         'address',
         'number',
         'neighborhood',
-        'complement'
+        'complement',
+        'marital_status_id',
+        'education_level_id',
+        'gender_id',
+        'nationality',
+        'city_id',
     ];
+
+    public function maritalStatus()
+    {
+        return $this->belongsTo(EstadoCivil::class, 'marital_status_id');
+    }
+
+    public function educationLevel()
+    {
+        return $this->belongsTo(GrauInstrucao::class, 'education_level_id');
+    }
+
+    public function gender()
+    {
+        return $this->belongsTo(Sexo::class, 'gender_id');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 }
+

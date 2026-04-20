@@ -2,8 +2,12 @@
 
 namespace App\Livewire;
 
+use App\Models\City;
 use Livewire\Component;
 use App\Models\Data;
+use App\Models\EstadoCivil;
+use App\Models\GrauInstrucao;
+use App\Models\Sexo;
 use Livewire\WithPagination;
 
 class Forms extends Component
@@ -14,6 +18,11 @@ class Forms extends Component
     protected $rules = [
         'fullname' => 'required|string|max:255',
         'socialname' => 'nullable|string|max:255',
+        'marital_status_id' => 'required|exists:estados_civis,id',
+        'education_level_id' => 'required|exists:graus_instrucaos,id',
+        'gender_id' => 'required|exists:sexos,id',
+        'nationality' => 'required|in:Brasileira,Estrangeira',
+        'city_id' => 'required|exists:cities,id',
         'cpf' => 'required|string|max:14',
         'rg' => 'required|string|max:20',
         'email' => 'required|string|max:255',
@@ -27,6 +36,15 @@ class Forms extends Component
 
     public string $fullname = '';
     public string $socialname = '';
+    public $estadosCivis = [];
+    public ?int $marital_status_id = null;
+    public $grausInstrucaos = [];
+    public ?int $education_level_id = null;
+    public $sexos = [];
+    public ?int $gender_id = null;
+    public ?string $nationality = 'Brasileira';
+    public $cities = [];
+    public ?int $city_id = null;
     public string $cpf = '';
     public string $rg = '';
     public string $email = '';
@@ -56,8 +74,17 @@ class Forms extends Component
                 $this->number = $data->number;
                 $this->neighborhood = $data->neighborhood;
                 $this->complement = $data->complement;
+                $this->nationality = $data->nationality;
+                $this->marital_status_id = $data->marital_status_id;
+                $this->education_level_id = $data->education_level_id;
+                $this->gender_id = $data->gender_id;
+                $this->city_id = $data->city_id;
             }
         }
+        $this->estadosCivis = EstadoCivil::whereIn('status', [true, 1])->get();
+        $this->grausInstrucaos = GrauInstrucao::whereIn('status', [true, 1])->get();
+        $this->sexos = Sexo::whereIn('status', [true, 1])->get();
+        $this->cities = City::whereIn('status', [true, 1])->get();
     }
 
     public function render()
@@ -76,17 +103,8 @@ class Forms extends Component
         $this->validate();
 
         Data::create($this->only([
-            'fullname',
-            'socialname',
-            'cpf',
-            'rg',
-            'email',
-            'phone',
-            'cep',
-            'address',
-            'number',
-            'neighborhood',
-            'complement'
+            'fullname', 'socialname', 'cpf', 'rg', 'email', 'phone',
+            'cep', 'marital_status_id', 'nationality', 'city_id','education_level_id', 'gender_id', 'address', 'number', 'neighborhood', 'complement'
         ]));
 
         $this->reset();
@@ -100,17 +118,8 @@ class Forms extends Component
 
         if ($data) {
             $data->update($this->only([
-                'fullname',
-                'socialname',
-                'cpf',
-                'rg',
-                'email',
-                'phone',
-                'cep',
-                'address',
-                'number',
-                'neighborhood',
-                'complement'
+                'fullname', 'socialname', 'cpf', 'rg', 'email', 'phone',
+                'cep', 'marital_status_id', 'city_id', 'nationality', 'education_level_id', 'gender_id', 'address', 'number', 'neighborhood', 'complement'
             ]));
 
             return redirect('/form');
