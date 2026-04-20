@@ -16,8 +16,8 @@ class EstadoCivil extends Model
 
     protected $table = 'estados_civis';
 
-    public function dados(){
-        return $this->hasMany(Dados::class, 'estado_civil_id', 'id');
+    public function data(){
+        return $this->hasMany(Data::class, 'marital_status_id', 'id');
     }
 
     

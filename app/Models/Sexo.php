@@ -16,8 +16,8 @@ class Sexo extends Model
 
     protected $table = 'sexos';
     
-    public function dados(){
+    public function data(){
 
-        return $this->hasMany(Dados::class, 'sexo_id', 'id');
+        return $this->hasMany(Data::class, 'gender_id', 'id');
     }
 }

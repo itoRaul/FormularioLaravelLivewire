@@ -16,7 +16,7 @@ class GrauInstrucao extends Model
 
     protected $table = 'graus_instrucaos';
 
-    public function dados(){
-        return $this->hasMany(Dados::class, 'grau_instrucao_id', 'id');
+    public function data(){
+        return $this->hasMany(Data::class, 'education_level_id', 'id');
     }
 }
