@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->boolean('status')->default(true);
-            $table->foreignId('state_id')->constrained('states');
             $table->timestamps();
         });
     }

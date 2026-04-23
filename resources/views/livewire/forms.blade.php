@@ -138,6 +138,7 @@
                 <div class="mt-4 flex gap-2">
                     <a href="{{ route('form.edit', ['id' => $d->id]) }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition">Editar</a>
                     <button wire:click="delete({{ $d->id }})" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">Deletar</button>
+                    <button wire:click="addProperty({{ $d->id }})" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Adicionar Imóvel</button>
                 </div>
             </div>
         @endforeach

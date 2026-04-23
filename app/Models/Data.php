@@ -47,4 +47,9 @@ class Data extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function dataProperties()
+    {
+        return $this->hasMany(DataProperty::class);
+    }
 }

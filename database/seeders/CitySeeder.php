@@ -15,25 +15,24 @@ class CitySeeder extends Seeder
     {
 
         $cities = [
-            ['name' => 'Cuiabá', 'state_id' => 1],
-            ['name' => 'Várzea Grande', 'state_id' => 1],
-            ['name' => 'São Paulo', 'state_id' => 2],
-            ['name' => 'Campinas', 'state_id' => 2],
-            ['name' => 'Rio de Janeiro', 'state_id' => 3],
-            ['name' => 'Niterói', 'state_id' => 3],
-            ['name' => 'Belo Horizonte', 'state_id' => 4],
-            ['name' => 'Uberlândia', 'state_id' => 4],
-            ['name' => 'Salvador', 'state_id' => 5],
-            ['name' => 'Feira de Santana', 'state_id' => 5],
-            ['name' => 'Curitiba', 'state_id' => 6],
-            ['name' => 'Londrina', 'state_id' => 6],
-            ['name' => 'Porto Alegre', 'state_id' => 7],
-            ['name' => 'Caxias do Sul', 'state_id' => 7],
+            ['name' => 'Cuiabá'],
+            ['name' => 'Várzea Grande'],
+            ['name' => 'São Paulo'],
+            ['name' => 'Campinas'],
+            ['name' => 'Rio de Janeiro'],
+            ['name' => 'Niterói'],
+            ['name' => 'Belo Horizonte'],
+            ['name' => 'Uberlândia'],
+            ['name' => 'Salvador'],
+            ['name' => 'Feira de Santana'],
+            ['name' => 'Curitiba'],
+            ['name' => 'Londrina'],
+            ['name' => 'Porto Alegre'],
+            ['name' => 'Caxias do Sul'],
         ];
         foreach ($cities as $city) {
             City::create([
                 'name' => $city['name'],
-                'state_id' => $city['state_id'],
                 'status' => true,
             ]);
         }
